@@ -1,17 +1,18 @@
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from .models import Account, Transaction
-import random
-from decimal import Decimal
-
-# Home
+from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
+from decimal import Decimal
+import random
+
+from .models import Account, Transaction
+
+
 def home(request):
     return HttpResponse("Bank System Running 🚀")
 
 
-# Create Account
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def create_account(request):
@@ -20,14 +21,16 @@ def create_account(request):
     account = Account.objects.create(
         user=request.user,
         account_number=account_number,
-        bank_name=request.data['bank_name'],
-        account_type=request.data['account_type']
+        bank_name=request.data.get('bank_name'),
+        account_type=request.data.get('account_type')
     )
 
-    return Response({"account_number": account.account_number})
+    return Response({
+        "message": "Account created successfully",
+        "account_number": account.account_number
+    })
 
 
-# My Accounts
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def my_accounts(request):
@@ -45,53 +48,69 @@ def my_accounts(request):
     return Response(data)
 
 
-# Deposit
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def deposit(request):
-    account = Account.objects.get(account_number=request.data['account_number'])
-    amount = Decimal(request.data['amount'])
+    account = get_object_or_404(
+        Account,
+        account_number=request.data.get('account_number').strip(),
+        user=request.user
+    )
+
+    amount = Decimal(request.data.get('amount'))
     account.balance += amount
     account.save()
 
-    Transaction.objects.create(account=account, amount=amount, transaction_type='deposit')
+    Transaction.objects.create(
+        account=account,
+        amount=amount,
+        transaction_type='deposit'
+    )
 
-    return Response({"balance": account.balance})
+    return Response({
+        "message": "Amount deposited",
+        "balance": account.balance
+    })
 
 
-# Withdraw
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def withdraw(request):
-    account = Account.objects.get(account_number=request.data['account_number'])
-    amount = Decimal(request.data['amount'])
+    account = get_object_or_404(
+        Account,
+        account_number=request.data.get('account_number').strip(),
+        user=request.user
+    )
+
+    amount = Decimal(request.data.get('amount'))
+
     if account.balance < amount:
-        return Response({"error": "Insufficient balance"})
+        return Response({"error": "Insufficient balance"}, status=400)
 
     account.balance -= amount
     account.save()
 
-    Transaction.objects.create(account=account, amount=amount, transaction_type='withdraw')
+    Transaction.objects.create(
+        account=account,
+        amount=amount,
+        transaction_type='withdraw'
+    )
 
-    return Response({"balance": account.balance})
+    return Response({
+        "message": "Amount withdrawn",
+        "balance": account.balance
+    })
 
-
-# Delete Account
-@api_view(['DELETE'])
-@permission_classes([IsAuthenticated])
-def delete_account(request):
-    account = Account.objects.get(account_number=request.data['account_number'])
-    account.delete()
-    return Response({"message": "Account deleted"})
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def transaction_history(request):
     account_number = request.GET.get('account_number')
 
-    account = Account.objects.get(
-        account_number=account_number,
-        user=request.user   # 🔐 security
+    account = get_object_or_404(
+        Account,
+        account_number=account_number.strip(),
+        user=request.user
     )
 
     transactions = Transaction.objects.filter(account=account)
@@ -105,3 +124,16 @@ def transaction_history(request):
         })
 
     return Response(data)
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def delete_account(request):
+    account = get_object_or_404(
+        Account,
+        account_number=request.data.get('account_number').strip(),
+        user=request.user
+    )
+
+    account.delete()
+
+    return Response({"message": "Account deleted successfully"})

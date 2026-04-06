@@ -16,19 +16,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework_simplejwt.views import TokenObtainPairView
 from django.http import HttpResponse
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView 
+from rest_framework_simplejwt.views import TokenRefreshView
+from users.views import EmailLoginView
 
-# simple home view
 def home(request):
     return HttpResponse("Bank System Running 🚀")
 
 urlpatterns = [
-    path('', home),   # 👈 VERY IMPORTANT (this fixes your error)
+    path('', home),
     path('admin/', admin.site.urls),
+
     path('api/users/', include('users.urls')),
     path('api/banking/', include('banking.urls')),
-    path('api/token/', TokenObtainPairView.as_view()),
-path('api/token/refresh/', TokenRefreshView.as_view()),
+
+    path('api/login/', EmailLoginView.as_view()),   # ✅ custom login
+    path('api/token/refresh/', TokenRefreshView.as_view()),
 ]
