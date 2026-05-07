@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aureon Bank - View Accounts</title>
+<!-- Tailwind CSS v3 CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bank: {
+              background: '#0a0a0a',
+              sidebar: '#0c0c0c',
+              border: '#1f1f1f',
+              accent: '#a78bfa',
+              accentHover: '#8b5cf6',
+              muted: '#71717a'
+            }
+          }
+        }
+      }
+    }
+  </script>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style data-purpose="global-styles">
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0a0a0a;
+      color: #ffffff;
+    }
+    .active-nav {
+      background: linear-gradient(90deg, rgba(167, 139, 250, 0.1) 0%, rgba(167, 139, 250, 0) 100%);
+      border-right: 2px solid #a78bfa;
+    }
+  </style>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/></head>
+<body class="h-full overflow-hidden flex flex-col">
+<!-- BEGIN: TopHeader -->
+<header class="h-16 border-b border-bank-border flex items-center justify-between px-6 bg-bank-background z-10" data-purpose="main-header">
+<div class="flex items-center gap-2">
+<h1 class="text-white font-semibold text-lg">Aureon Bank</h1>
+</div>
+<div class="flex items-center gap-6 text-bank-muted">
+<div class="w-8 h-8 rounded-md overflow-hidden border border-bank-border"><span class="material-symbols-outlined text-white flex items-center justify-center w-full h-full text-xl">person</span></div>
+</div>
+</header>
+<!-- END: TopHeader -->
+<div class="flex flex-1 overflow-hidden">
+<!-- BEGIN: Sidebar -->
+<aside class="w-64 border-r border-bank-border bg-bank-sidebar flex flex-col justify-between py-6 shrink-0" data-purpose="sidebar-navigation">
+<div>
+<div class="px-6 mb-8">
+<h2 class="text-bank-accent font-bold tracking-wider text-sm uppercase">Aureon Bank India</h2>
+<p class="text-[10px] text-bank-muted uppercase tracking-widest mt-1">Premium Banking</p>
+</div>
+<nav class="space-y-1">
+<!-- Active State -->
+<a class="active-nav flex items-center px-6 py-3 text-bank-accent text-sm font-medium gap-3" href="#">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg"><rect height="18" rx="2" ry="2" width="18" x="3" y="3"></rect><path d="M7 7h3v10H7z"></path><path d="M14 7h3v10h-3z"></path></svg>
+            View Accounts
+          </a>
+<!-- Link 2 -->
+<a class="flex items-center px-6 py-3 text-gray-400 hover:text-white hover:bg-white/5 text-sm font-medium gap-3 transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-size: 18px;">swap_horiz</span>
+  Transfer Money
+</a>
+<!-- Link 3 -->
+<a class="flex items-center px-6 py-3 text-gray-400 hover:text-white hover:bg-white/5 text-sm font-medium gap-3 transition-colors" href="#">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M3 3v18h18"></path><path d="M7 16h3"></path><path d="M11 11h3"></path><path d="M15 6h3"></path></svg>
+            Account Summary
+          </a>
+</nav>
+</div>
+<div class="px-6">
+<button class="flex items-center text-gray-400 hover:text-white text-sm font-medium gap-3 transition-colors">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" x2="9" y1="12" y2="12"></line></svg>
+          Logout
+        </button>
+</div>
+</aside>
+<!-- END: Sidebar -->
+<!-- BEGIN: MainContent -->
+<main class="flex-1 flex flex-col items-center justify-center relative overflow-y-auto" data-purpose="empty-state-view">
+<!-- Central Empty State -->
+<div class="flex flex-col items-center max-w-md text-center px-6">
+<!-- Icon Container -->
+<div class="relative w-48 h-48 bg-[#111111] rounded-2xl border border-bank-border flex items-center justify-center mb-8 shadow-2xl" data-purpose="empty-illustration">
+<div class="opacity-20">
+<svg fill="none" height="80" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="80" xmlns="http://www.w3.org/2000/svg"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+</div>
+<!-- Green Badge Overlay -->
+<div class="absolute bottom-[35%] right-[30%] bg-[#0f1b15] border border-[#16a34a] rounded-lg p-1 text-[#16a34a]">
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="16"></line><line x1="8" x2="16" y1="12" y2="12"></line></svg>
+</div>
+</div>
+<h2 class="text-3xl font-bold mb-4 tracking-tight">No accounts found</h2>
+<p class="text-bank-muted text-base leading-relaxed mb-8">
+          Get started by adding your first financial account to manage your balances and track transactions.
+        </p>
+<button class="bg-bank-accent hover:bg-bank-accentHover text-[#111] font-bold py-3 px-8 rounded-lg flex items-center gap-3 transition-all transform hover:scale-[1.02] shadow-lg shadow-bank-accent/20">
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" x2="12" y1="3" y2="15"></line><rect height="4" rx="1" width="6" x="14" y="10"></rect></svg>
+          Add Account
+        </button>
+</div>
+<!-- Bottom Decorative Skeleton Cards -->
+<div class="absolute bottom-12 flex gap-4 opacity-10 pointer-events-none" data-purpose="skeleton-previews">
+<div class="w-64 h-32 border border-bank-border rounded-xl p-4 flex flex-col justify-between">
+<div class="w-8 h-8 rounded-full border border-gray-500"></div>
+<div class="space-y-2">
+<div class="h-2 w-3/4 bg-gray-600 rounded"></div>
+<div class="h-2 w-1/2 bg-gray-700 rounded"></div>
+</div>
+</div>
+<div class="w-64 h-32 border border-bank-border rounded-xl p-4 flex flex-col justify-between">
+<div class="w-8 h-8 rounded-full border border-gray-500"></div>
+<div class="space-y-2">
+<div class="h-2 w-3/4 bg-gray-600 rounded"></div>
+<div class="h-2 w-1/2 bg-gray-700 rounded"></div>
+</div>
+</div>
+<div class="w-64 h-32 border border-bank-border rounded-xl p-4 flex flex-col justify-between">
+<div class="w-8 h-8 rounded-full border border-gray-500"></div>
+<div class="space-y-2">
+<div class="h-2 w-3/4 bg-gray-600 rounded"></div>
+<div class="h-2 w-1/2 bg-gray-700 rounded"></div>
+</div>
+</div>
+</div>
+</main>
+<!-- END: MainContent -->
+</div>
+</body></html>

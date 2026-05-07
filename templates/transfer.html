@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aureon Bank - Transfer Money</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              background: '#09090b',
+              sidebar: '#111114',
+              card: '#18181b',
+              accent: '#8b5cf6', // Purple from the image
+              textMuted: '#a1a1aa',
+              border: '#27272a'
+            }
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="scrollbar-styling">
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #09090b;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #27272a;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="bg-brand-background text-white font-sans antialiased min-h-screen flex">
+<!-- BEGIN: Sidebar -->
+<aside class="w-64 bg-brand-sidebar border-r border-brand-border flex flex-col fixed inset-y-0 left-0" data-purpose="main-navigation">
+<!-- Brand Logo -->
+<div class="p-6">
+<h1 class="text-xl font-bold text-brand-accent">Aureon Bank</h1>
+<p class="text-[10px] uppercase tracking-widest text-brand-textMuted">Premium Banking</p>
+</div>
+<!-- Navigation Links -->
+<nav class="flex-1 mt-4 space-y-1">
+<a class="flex items-center px-6 py-3 text-sm font-medium text-brand-textMuted hover:text-white transition-colors" href="#">
+<svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+        View Accounts
+      </a>
+<a class="flex items-center px-6 py-3 text-sm font-medium text-brand-textMuted hover:text-white transition-colors" href="#">
+<svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+        Account Summary
+      </a>
+<!-- Active Link -->
+<a class="flex items-center px-6 py-3 text-sm font-medium text-white bg-brand-accent/10 border-r-4 border-brand-accent" href="#">
+<svg class="w-5 h-5 mr-3 text-brand-accent" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+        Transfer Money
+      </a>
+</nav>
+<!-- Logout -->
+<div class="p-6 border-t border-brand-border">
+<button class="flex items-center text-sm font-medium text-brand-textMuted hover:text-white transition-colors">
+<svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+        Logout
+      </button>
+</div>
+</aside>
+<!-- END: Sidebar -->
+<!-- Main Content Area -->
+<main class="ml-64 flex-1 flex flex-col">
+<!-- BEGIN: Top Bar -->
+<header class="flex items-center justify-between px-8 py-4" data-purpose="top-navigation">
+<button class="flex items-center text-sm text-brand-textMuted hover:text-white transition-colors">
+<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M10 19l-7-7m0 0l7-7m-7 7h18" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+        Back to Account Details
+      </button>
+<div class="flex items-center space-x-6 text-brand-textMuted">
+<button class="hover:text-white"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></button>
+<button class="hover:text-white"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></button>
+</div>
+</header>
+<!-- END: Top Bar -->
+<!-- BEGIN: Transfer Screen Content -->
+<div class="px-12 py-10 max-w-6xl w-full mx-auto">
+<!-- Heading -->
+<section class="mb-10">
+<h2 class="text-3xl font-bold mb-2">Transfer Money</h2>
+<p class="text-brand-textMuted">Move funds securely between accounts or to external beneficiaries.</p>
+</section>
+<div class="flex flex-col lg:flex-row gap-8 items-start">
+<!-- BEGIN: Transfer Form Card -->
+<div class="flex-1 bg-brand-card rounded-2xl p-8 border border-brand-border shadow-2xl w-full max-w-2xl" data-purpose="form-container">
+<form class="space-y-8">
+<!-- From Account Section -->
+<div data-purpose="input-group">
+<label class="block text-[10px] font-bold uppercase tracking-widest text-brand-textMuted mb-3">From Account</label>
+<div class="relative">
+<select class="w-full bg-black/40 border border-brand-border rounded-lg px-4 py-3.5 appearance-none focus:ring-1 focus:ring-brand-accent focus:border-brand-accent outline-none">
+<option>Primary Savings ****4582 — ₹2,45,000.00</option>
+</select>
+<div class="absolute inset-y-0 right-4 flex items-center pointer-events-none">
+<svg class="w-4 h-4 text-brand-textMuted" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</div>
+</div>
+<!-- To Account & IFSC Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div data-purpose="input-group">
+<label class="block text-[10px] font-bold uppercase tracking-widest text-brand-textMuted mb-3">To Account Number</label>
+<input class="w-full bg-black/40 border border-brand-border rounded-lg px-4 py-3.5 placeholder:text-brand-textMuted/40 focus:ring-1 focus:ring-brand-accent focus:border-brand-accent outline-none" placeholder="Enter account number" type="text"/>
+</div>
+<div data-purpose="input-group">
+<label class="block text-[10px] font-bold uppercase tracking-widest text-brand-textMuted mb-3">IFSC Code</label>
+<input class="w-full bg-black/40 border border-brand-border rounded-lg px-4 py-3.5 placeholder:text-brand-textMuted/40 focus:ring-1 focus:ring-brand-accent focus:border-brand-accent outline-none" placeholder="APEX0001234" type="text"/>
+</div>
+</div>
+<!-- Amount Section -->
+<div data-purpose="input-group">
+<label class="block text-[10px] font-bold uppercase tracking-widest text-brand-textMuted mb-3">Amount (₹)</label>
+<div class="relative">
+<input class="w-full bg-black/40 border border-brand-border rounded-lg px-4 py-4 text-lg font-medium focus:ring-1 focus:ring-brand-accent focus:border-brand-accent outline-none" type="text" value="₹ 0.00"/>
+</div>
+</div>
+<!-- Form Actions -->
+<div class="flex items-center gap-4 pt-4">
+<button class="flex-1 bg-brand-accent hover:bg-opacity-90 text-white font-semibold py-4 rounded-lg flex items-center justify-center transition-all" type="submit">
+<svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                Transfer
+              </button>
+<button class="flex-1 bg-transparent hover:bg-white/5 text-brand-textMuted font-semibold py-4 rounded-lg transition-all border border-transparent" type="button">
+                Cancel
+              </button>
+</div>
+</form>
+</div>
+<!-- END: Transfer Form Card -->
+<!-- BEGIN: Info Card -->
+<div class="w-full lg:w-72 bg-brand-card rounded-2xl p-6 border border-brand-border" data-purpose="info-card">
+<div class="w-10 h-10 bg-brand-accent/10 rounded-lg flex items-center justify-center mb-4">
+<svg class="w-6 h-6 text-brand-accent" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<h3 class="text-lg font-semibold mb-3">Secure Transfer</h3>
+<p class="text-sm text-brand-textMuted leading-relaxed">
+            Your transaction is protected by bank-grade 256-bit encryption. Multi-factor authentication may be required for large amounts.
+          </p>
+</div>
+<!-- END: Info Card -->
+</div>
+</div>
+<!-- END: Transfer Screen Content -->
+<!-- BEGIN: Footer -->
+<footer class="mt-auto px-12 py-6 border-t border-brand-border">
+<div class="flex items-center justify-between text-xs text-brand-textMuted uppercase tracking-widest">
+<span>© 2023 Aureon Bank Ltd.</span>
+<div class="flex space-x-6">
+<a class="hover:text-white transition-colors" href="#">Security</a>
+<a class="hover:text-white transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-white transition-colors" href="#">Support</a>
+</div>
+</div>
+</footer>
+<!-- END: Footer -->
+</main>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const go = (url) => { window.location.href = url; };
+
+    document.querySelectorAll('a').forEach((link) => {
+      const text = link.textContent.trim().toLowerCase();
+      if (text.includes('view accounts')) link.href = '/accounts/';
+      if (text.includes('account summary')) link.href = '/summary/';
+      if (text.includes('transfer money')) link.href = '/transfer/';
+    });
+
+    document.querySelectorAll('button').forEach((button) => {
+      const text = button.textContent.trim().toLowerCase();
+      if (text.includes('logout')) {
+        button.addEventListener('click', () => go('/login-page/'));
+      } else if (text.includes('transfer')) {
+        button.addEventListener('click', (event) => {
+          event.preventDefault();
+          go('/accounts/');
+        });
+      } else if (text.includes('back') || text.includes('cancel')) {
+        button.addEventListener('click', () => go('/accounts/'));
+      }
+    });
+  });
+</script>
+</body></html>

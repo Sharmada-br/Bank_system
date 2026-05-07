@@ -18,3 +18,13 @@ class RegisterSerializer(serializers.ModelSerializer):
             phone=validated_data['phone']
         )
         return user
+    
+    def validate_email(self, value):
+
+        if User.objects.filter(email=value).exists():
+
+            raise serializers.ValidationError(
+            "Account already exists"
+        )
+
+        return value

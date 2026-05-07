@@ -16,20 +16,30 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.http import HttpResponse
 from rest_framework_simplejwt.views import TokenRefreshView
 from users.views import EmailLoginView
-
-def home(request):
-    return HttpResponse("Bank System Running 🚀")
+from banking import views
 
 urlpatterns = [
-    path('', home),
+
+    path('', include('banking.urls')),
+
     path('admin/', admin.site.urls),
 
     path('api/users/', include('users.urls')),
+
     path('api/banking/', include('banking.urls')),
 
-    path('api/login/', EmailLoginView.as_view()),   # ✅ custom login
-    path('api/token/refresh/', TokenRefreshView.as_view()),
+    path(
+        'api/login/',
+        EmailLoginView.as_view()
+    ),
+
+    path(
+        'api/token/refresh/',
+        TokenRefreshView.as_view()
+    ),
+
+    
+
 ]

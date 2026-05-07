@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-[#0a0a0a]" lang="en"><head><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aureon Bank - Account Summary</title>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style data-purpose="custom-scrollbar">
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #111;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #333;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #444;
+    }
+  </style>
+<style data-purpose="typography">
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body class="h-full text-white antialiased">
+<!-- BEGIN: Main Dashboard Layout -->
+<div class="flex h-screen overflow-hidden">
+<!-- BEGIN: Sidebar -->
+<aside class="w-64 flex-shrink-0 border-r border-[#222] flex flex-col bg-[#0a0a0a]" data-purpose="sidebar">
+<!-- Logo Section -->
+<div class="p-8 pb-12">
+<h1 class="text-xl font-bold tracking-tight text-white">Aureon Bank</h1>
+<p class="text-[10px] uppercase tracking-[0.2em] text-gray-500 font-medium">Precision Banking</p>
+</div>
+<!-- Navigation Links -->
+<nav class="flex-1 px-4 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white transition-colors group" href="#">
+<svg class="opacity-70 group-hover:opacity-100" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+<span class="text-sm font-medium">View Accounts</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-[#a78bfa15] border border-[#a78bfa30] rounded-lg text-[#a78bfa] transition-colors" data-purpose="active-nav" href="#">
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="18" rx="2" width="18" x="3" y="3"></rect><path d="M3 9h18"></path><path d="M9 21V9"></path></svg>
+<span class="text-sm font-medium">Account Summary</span>
+</a><a class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined opacity-70 group-hover:opacity-100" style="font-size: 20px;">swap_horiz</span>
+<span class="text-sm font-medium">Transfer Money</span>
+</a>
+</nav>
+<!-- Sidebar Bottom -->
+<div class="p-6 border-t border-[#222]">
+<button class="flex items-center gap-3 px-2 text-gray-400 hover:text-white transition-colors w-full">
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" x2="9" y1="12" y2="12"></line></svg>
+<span class="text-sm font-medium">Logout</span>
+</button>
+</div>
+</aside>
+<!-- END: Sidebar -->
+<!-- BEGIN: Main Content Area -->
+<main class="flex-1 flex flex-col min-w-0 bg-[#0a0a0a] overflow-y-auto">
+<!-- BEGIN: Top Navbar -->
+<header class="flex items-center justify-between px-8 py-6 sticky top-0 bg-[#0a0a0a] z-10">
+<div class="flex items-center gap-4">
+<button class="p-1 hover:bg-zinc-800 rounded-full transition-colors">
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg>
+</button>
+<h2 class="text-lg font-semibold tracking-tight">Account Summary</h2>
+</div>
+<div class="flex items-center gap-6">
+<div class="w-8 h-8 rounded-full overflow-hidden border border-[#a78bfa] flex-shrink-0 bg-zinc-800"><span class="material-symbols-outlined flex items-center justify-center w-full h-full text-white" style="font-size: 24px;">account_circle</span></div>
+</div>
+</header>
+<!-- END: Top Navbar -->
+<!-- BEGIN: Content Body -->
+<section class="px-8 pb-12 space-y-8 flex-1">
+<!-- Summary Cards Grid -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Balance Card -->
+<div class="col-span-12 lg:col-span-8 bg-[#151515] rounded-3xl p-8 flex flex-col justify-between border border-[#222] min-h-[280px]" data-purpose="balance-card">
+<div>
+<p class="text-xs uppercase tracking-[0.15em] text-gray-500 font-semibold mb-4">Total Combined Balance</p>
+<h3 class="text-6xl font-bold tracking-tight">₹6,91,810.50</h3>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2 text-emerald-500 font-medium">
+<svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>
+<span class="text-sm">+2.4% from last month</span>
+</div>
+<div class="opacity-10">
+<svg fill="none" height="80" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="80" xmlns="http://www.w3.org/2000/svg"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"></path><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"></path><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"></path></svg>
+</div>
+</div>
+</div>
+<!-- Active Accounts Card -->
+<div class="col-span-12 lg:col-span-4 bg-[#a78bfa] rounded-3xl p-8 flex flex-col justify-between border border-transparent shadow-2xl shadow-[#a78bfa20] text-black min-h-[280px]" data-purpose="accounts-count-card">
+<div class="bg-[#00000020] w-12 h-12 rounded-xl flex items-center justify-center">
+<svg fill="none" height="24" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="m7.5 4.27 9 5.15"></path><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"></path><path d="m3.3 7 8.7 5 8.7-5"></path><path d="M12 22V12"></path></svg>
+</div>
+<div>
+<p class="text-sm font-medium opacity-70 mb-1">Active Accounts</p>
+<h3 class="text-5xl font-bold">03</h3>
+</div>
+</div>
+</div>
+<!-- Asset Allocation Section -->
+</section>
+<!-- END: Content Body -->
+<!-- BEGIN: Footer -->
+<footer class="px-8 py-8 border-t border-[#222] flex items-center justify-between text-[11px] text-gray-500 font-medium">
+<div>
+<span class="block font-bold text-gray-400 mb-1">Aureon Bank</span>
+<span>© 2024 Aureon Bank. Precision in Darkness.</span>
+</div>
+</footer>
+<!-- END: Footer -->
+</main>
+<!-- END: Main Content Area -->
+</div>
+<!-- END: Main Dashboard Layout -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const go = (url) => { window.location.href = url; };
+
+    document.querySelectorAll('a').forEach((link) => {
+      const text = link.textContent.trim().toLowerCase();
+      if (text.includes('view accounts')) link.href = '/accounts/';
+      if (text.includes('transfer money')) link.href = '/transfer/';
+      if (text.includes('account summary')) link.href = '/summary/';
+    });
+
+    document.querySelectorAll('button').forEach((button) => {
+      const text = button.textContent.trim().toLowerCase();
+      if (text.includes('logout')) button.addEventListener('click', () => go('/login-page/'));
+      else button.addEventListener('click', () => go('/accounts/'));
+    });
+  });
+</script>
+</body></html>
