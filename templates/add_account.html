@@ -4,8 +4,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Aureon Bank - Add New Account</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<style data-purpose="custom-theme">
+<link rel="stylesheet" href="/static/css/output.css"><style data-purpose="custom-theme">
     :root {
       --bg-dark: #0a0a0b;
       --sidebar-bg: #0d0d0f;
@@ -27,38 +26,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/></head>
 <body class="h-full font-sans antialiased">
 <div class="flex h-full" data-purpose="main-layout">
-<!-- BEGIN: Sidebar -->
-<aside class="w-64 bg-[#0d0d0f] border-r border-gray-800 flex flex-col justify-between h-screen sticky top-0" data-purpose="navigation-sidebar">
-<div>
-<!-- Brand Header -->
-<div class="p-6">
-<h1 class="text-accent-purple text-xl font-bold tracking-tight" style="color: #a78bfa;">Aureon Bank</h1>
-<p class="text-[10px] tracking-widest text-gray-500 font-semibold mt-1">PREMIUM BANKING</p>
-</div>
-<!-- Navigation Menu -->
-<nav class="mt-6 flex flex-col space-y-1" data-purpose="sidebar-nav">
-<a class="flex items-center px-6 py-4 text-gray-400 hover:text-white transition-colors group" href="#">
-<svg class="w-5 h-5 mr-3 opacity-60 group-hover:opacity-100" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 6h16M4 10h16M4 14h16M4 18h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-<span class="text-sm font-medium">View Accounts</span>
-</a>
-<a class="flex items-center px-6 py-4 text-gray-400 hover:text-white transition-colors group" href="#">
-<span class="material-symbols-outlined w-5 h-5 mr-3 opacity-60 group-hover:opacity-100 flex items-center justify-center text-[20px]">swap_horiz</span>
-<span class="text-sm font-medium">Transfer Money</span>
-</a>
-<a class="flex items-center px-6 py-4 text-gray-400 hover:text-white transition-colors group" href="#">
-<svg class="w-5 h-5 mr-3 opacity-60 group-hover:opacity-100" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-<span class="text-sm font-medium">Account Summary</span>
-</a>
-</nav>
-</div>
-<!-- Footer Menu -->
-<div class="p-6 border-t border-gray-800">
-<a class="flex items-center text-gray-400 hover:text-white transition-colors group" href="#">
-<svg class="w-5 h-5 mr-3 opacity-60 group-hover:opacity-100" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-<span class="text-sm font-medium">Logout</span>
-</a>
-</div>
-</aside>
+{% include "partials/sidebar.html" with active_page="accounts" %}
 <!-- END: Sidebar -->
 <!-- BEGIN: Main Content Area -->
 <main class="flex-1 overflow-y-auto p-12" data-purpose="content-viewer">
@@ -89,26 +57,106 @@
 <section class="bg-[#131316] rounded-2xl border border-gray-800 p-8 md:col-span-12" data-purpose="account-form-card">
 <form class="grid grid-cols-2 gap-x-8 gap-y-10" id="addAccountForm">
 <!-- Input Field 1 -->
+
 <div class="flex flex-col space-y-3">
-<label class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Account Holder Name</label>
-<input class="bg-[#1a1a1e] border-gray-800 border rounded-lg py-4 px-5 text-gray-300 placeholder-gray-700 focus:border-accent-purple focus:ring-0 transition-all" name="holder_name" placeholder="John Doe" type="text"/>
+
+    <label class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">
+        Bank Name
+    </label>
+
+    <input
+        class="bg-[#1a1a1e] border-gray-800 border rounded-lg py-4 px-5 text-gray-300 placeholder-gray-700 focus:border-accent-purple focus:ring-0 transition-all"
+        id="bank_name"
+        name="holder_name"
+        placeholder="Aureon Bank"
+        type="text"
+    />
+
 </div>
+
 <!-- Input Field 2 -->
+
 <div class="flex flex-col space-y-3">
-<label class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Account Number</label>
-<input class="bg-[#1a1a1e] border-gray-800 border rounded-lg py-4 px-5 text-gray-300 placeholder-gray-700 focus:border-accent-purple focus:ring-0 transition-all" name="display_account_number" placeholder="0000 0000 0000" type="text"/>
+
+    <label class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">
+        Account Number
+    </label>
+
+    <input
+        class="bg-[#1a1a1e] border-gray-800 border rounded-lg py-4 px-5 text-gray-300 placeholder-gray-700 focus:border-accent-purple focus:ring-0 transition-all"
+        id="display_account_number"
+        name="display_account_number"
+        placeholder="0000 0000 0000"
+        type="text"
+    />
+
 </div>
+
 <!-- Input Field 3 -->
+
 <div class="flex flex-col space-y-3">
-<label class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">IFSC Code</label>
-<input class="bg-[#1a1a1e] border-gray-800 border rounded-lg py-4 px-5 text-gray-300 placeholder-gray-700 focus:border-accent-purple focus:ring-0 transition-all" name="ifsc" placeholder="AUREON0001234" type="text"/>
+
+    <label class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">
+        IFSC Code
+    </label>
+
+    <input
+        class="bg-[#1a1a1e] border-gray-800 border rounded-lg py-4 px-5 text-gray-300 placeholder-gray-700 focus:border-accent-purple focus:ring-0 transition-all"
+        id="ifsc_code"
+        name="ifsc"
+        placeholder="AUREON0001234"
+        type="text"
+    />
+
 </div>
+
 <!-- Input Field 4 -->
+
 <div class="flex flex-col space-y-3">
-<label class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Initial Balance</label>
-<div class="relative">
-<input class="w-full bg-[#1a1a1e] border-gray-800 border rounded-lg py-4 px-5 text-gray-300 placeholder-gray-700 focus:border-accent-purple focus:ring-0 transition-all" name="balance" placeholder="₹ 0.00" type="text"/>
+
+    <label class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">
+        Account Type
+    </label>
+
+    <select
+        id="account_type"
+        class="bg-[#1a1a1e] border-gray-800 border rounded-lg py-4 px-5 text-gray-300 focus:border-accent-purple focus:ring-0 transition-all"
+    >
+        <option value="Savings">
+            Savings
+        </option>
+
+        <option value="Current">
+            Current
+        </option>
+
+        <option value="Salary">
+            Salary
+        </option>
+    </select>
+
 </div>
+
+<!-- Input Field 5 -->
+
+<div class="flex flex-col space-y-3 col-span-2">
+
+    <label class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">
+        Initial Balance
+    </label>
+
+    <div class="relative">
+
+        <input
+            class="w-full bg-[#1a1a1e] border-gray-800 border rounded-lg py-4 px-5 text-gray-300 placeholder-gray-700 focus:border-accent-purple focus:ring-0 transition-all"
+            id="balance"
+            name="balance"
+            placeholder="₹ 0.00"
+            type="text"
+        />
+
+    </div>
+
 </div>
 <!-- Form Actions -->
 <div class="col-span-2 flex justify-end items-center space-x-6 mt-4">
@@ -148,12 +196,26 @@
     const token = localStorage.getItem('access') || localStorage.getItem('token');
     const form = document.getElementById('addAccountForm');
 
+    if (!token) {
+      go('/login-page/');
+      return;
+    }
+
     document.querySelectorAll('a').forEach((link) => {
       const text = link.textContent.trim().toLowerCase();
       if (text.includes('view accounts')) link.href = '/dashboard/';
       if (text.includes('transfer money')) link.href = '/transfer/';
       if (text.includes('account summary')) link.href = '/summary/';
       if (text.includes('logout')) link.href = '/login-page/';
+      if (text.includes('logout')) {
+        link.addEventListener('click', () => {
+          localStorage.removeItem('access');
+          localStorage.removeItem('refresh');
+          localStorage.removeItem('token');
+          localStorage.removeItem('selectedAccountId');
+          localStorage.removeItem('selectedAccountNumber');
+        });
+      }
     });
 
     document.querySelectorAll('button[type="button"]').forEach((button) => {
@@ -186,11 +248,28 @@
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + token
           },
-          body: JSON.stringify({
-            bank_name: 'Aureon Bank',
-            account_type: 'Savings',
-            balance: formData.get('balance') || 0
-          })
+        body: JSON.stringify({
+
+    bank_name:
+        document.getElementById(
+            'bank_name'
+        ).value,
+
+    ifsc_code:
+        document.getElementById(
+            'ifsc_code'
+        ).value,
+
+    account_type:
+        document.getElementById(
+            'account_type'
+        ).value,
+
+    balance:
+        document.getElementById(
+            'balance'
+        ).value
+})
         });
 
         if (!response.ok) {

@@ -5,29 +5,8 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Add New Transaction - Aureon Bank</title>
 <!-- Tailwind CSS CDN with plugins -->
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<!-- Tailwind Configuration for Custom Colors & Fonts -->
-<script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: '#8B5CF6',
-            'surface-dark': '#131313',
-            'surface-container': '#1c1b1b',
-            'surface-bright': '#3a3939',
-            'input-bg': '#1e1e1e',
-          },
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-          },
-          borderRadius: {
-            'custom': '4px',
-          }
-        }
-      }
-    }
-  </script>
+<link rel="stylesheet" href="/static/css/output.css"><!-- Tailwind Configuration for Custom Colors & Fonts -->
+
 <!-- Google Fonts: Inter -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <style data-purpose="custom-scrollbars">
@@ -50,37 +29,7 @@
   </style>
 </head>
 <body class="h-full text-gray-100 font-sans flex overflow-hidden">
-<!-- BEGIN: Sidebar Navigation -->
-<aside class="w-64 flex-shrink-0 bg-[#0e0e0e] border-r border-white/5 flex flex-col justify-between" data-purpose="main-sidebar">
-<div class="flex flex-col">
-<!-- Brand Logo Section -->
-<div class="p-6 mb-4">
-<h1 class="text-xl font-bold text-white leading-tight">Aureon Bank</h1>
-<p class="text-[10px] uppercase tracking-widest text-gray-500 font-semibold">Premium Banking</p>
-</div>
-<!-- Navigation Links -->
-<nav class="space-y-1"><a class="flex items-center px-6 py-3 text-sm text-gray-400 hover:text-white transition-colors" href="#">
-<svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 6h16M4 10h16M4 14h16M4 18h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-          View Accounts
-        </a>
-<a class="flex items-center px-6 py-3 text-sm text-gray-400 hover:text-white transition-colors" href="#">
-<svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-          Transfer Money
-        </a>
-<a class="flex items-center px-6 py-3 text-sm text-gray-400 hover:text-white transition-colors" href="#">
-<svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-          Account Summary
-        </a></nav>
-</div>
-<!-- Bottom Actions -->
-<div class="p-6">
-<a class="flex items-center text-sm text-gray-400 hover:text-white transition-colors" href="#">
-<svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-        Logout
-      </a>
-</div>
-</aside>
-<!-- END: Sidebar Navigation -->
+{% include "partials/sidebar.html" with active_page="accounts" %}
 <!-- BEGIN: Main Content Area -->
 <main class="flex-1 overflow-y-auto bg-[#131313]" data-purpose="main-viewport">
 <!-- Top Bar -->
@@ -165,23 +114,117 @@
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const go = (url) => { window.location.href = url; };
+    const token = localStorage.getItem('access') || localStorage.getItem('token');
+    const params = new URLSearchParams(window.location.search);
+    const accountId = params.get('id') || localStorage.getItem('selectedAccountId');
+    const form = document.querySelector('form');
+    const amountInput = document.querySelector('[data-purpose="amount-input"] input');
+    const typeButtons = document.querySelectorAll('[data-purpose="type-selector"] button');
+    let transactionType = 'deposit';
+
+    if (!token) {
+      go('/login-page/');
+      return;
+    }
+
+    if (!accountId) {
+      alert('Please select an account first.');
+      go('/dashboard/');
+      return;
+    }
+
+    function setType(type) {
+      transactionType = type;
+      typeButtons.forEach((button) => {
+        const isActive = button.textContent.trim().toLowerCase().includes(type === 'deposit' ? 'credit' : 'debit');
+        button.classList.toggle('bg-[#3a3939]', isActive);
+        button.classList.toggle('text-white', isActive);
+        button.classList.toggle('text-gray-400', !isActive);
+      });
+    }
+
+    async function loadAccount() {
+      const response = await fetch('/api/banking/account/' + accountId + '/', {
+        headers: { 'Authorization': 'Bearer ' + token }
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.detail || 'Failed to load account.');
+      localStorage.setItem('selectedAccountNumber', data.account_number);
+      const balanceText = document.querySelector('[data-purpose="amount-input"] p');
+      if (balanceText) {
+        balanceText.textContent = 'Available balance: ₹' + Number(data.balance || 0).toLocaleString('en-IN', {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        });
+      }
+      return data;
+    }
 
     document.querySelectorAll('a').forEach((link) => {
       const text = link.textContent.trim().toLowerCase();
-      if (text.includes('view accounts')) link.href = '/accounts/';
+      if (text.includes('view accounts')) link.href = '/dashboard/';
       if (text.includes('transfer money')) link.href = '/transfer/';
       if (text.includes('account summary')) link.href = '/summary/';
       if (text.includes('logout')) link.href = '/login-page/';
+      if (text.includes('logout')) {
+        link.addEventListener('click', () => {
+          localStorage.removeItem('access');
+          localStorage.removeItem('refresh');
+          localStorage.removeItem('token');
+          localStorage.removeItem('selectedAccountId');
+          localStorage.removeItem('selectedAccountNumber');
+        });
+      }
+    });
+
+    typeButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const text = button.textContent.trim().toLowerCase();
+        setType(text.includes('debit') ? 'withdraw' : 'deposit');
+      });
     });
 
     document.querySelectorAll('button').forEach((button) => {
       const text = button.textContent.trim().toLowerCase();
-      if (text.includes('back to account details') || text.includes('cancel') || text.includes('submit transaction')) {
+      if (text.includes('back to account details') || text.includes('cancel')) {
         button.addEventListener('click', (event) => {
           event.preventDefault();
-          go('/account-page/');
+          go('/account-page/?id=' + accountId);
         });
       }
+    });
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      try {
+        const account = await loadAccount();
+        const response = await fetch('/api/banking/' + transactionType + '/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+          },
+          body: JSON.stringify({
+            account_number: account.account_number,
+            amount: amountInput.value
+          })
+        });
+        const data = await response.json().catch(() => ({}));
+
+        if (!response.ok) throw new Error(data.error || 'Transaction failed.');
+
+        alert('Transaction Saved Successfully');
+        go('/account-page/?id=' + accountId);
+      } catch (error) {
+        alert(error.message || 'Failed to Save Transaction');
+      }
+    });
+
+    setType('deposit');
+    loadAccount().catch((error) => {
+      alert(error.message || 'Failed to load account.');
+      go('/dashboard/');
     });
   });
 </script>

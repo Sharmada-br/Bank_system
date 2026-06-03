@@ -4,25 +4,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Aureon Bank - Transfer Money</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              background: '#09090b',
-              sidebar: '#111114',
-              card: '#18181b',
-              accent: '#8b5cf6', // Purple from the image
-              textMuted: '#a1a1aa',
-              border: '#27272a'
-            }
-          }
-        }
-      }
-    }
-  </script>
+<link rel="stylesheet" href="/static/css/output.css">
 <style data-purpose="scrollbar-styling">
     ::-webkit-scrollbar {
       width: 8px;
@@ -37,50 +19,15 @@
   </style>
 </head>
 <body class="bg-brand-background text-white font-sans antialiased min-h-screen flex">
-<!-- BEGIN: Sidebar -->
-<aside class="w-64 bg-brand-sidebar border-r border-brand-border flex flex-col fixed inset-y-0 left-0" data-purpose="main-navigation">
-<!-- Brand Logo -->
-<div class="p-6">
-<h1 class="text-xl font-bold text-brand-accent">Aureon Bank</h1>
-<p class="text-[10px] uppercase tracking-widest text-brand-textMuted">Premium Banking</p>
-</div>
-<!-- Navigation Links -->
-<nav class="flex-1 mt-4 space-y-1">
-<a class="flex items-center px-6 py-3 text-sm font-medium text-brand-textMuted hover:text-white transition-colors" href="#">
-<svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-        View Accounts
-      </a>
-<a class="flex items-center px-6 py-3 text-sm font-medium text-brand-textMuted hover:text-white transition-colors" href="#">
-<svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-        Account Summary
-      </a>
-<!-- Active Link -->
-<a class="flex items-center px-6 py-3 text-sm font-medium text-white bg-brand-accent/10 border-r-4 border-brand-accent" href="#">
-<svg class="w-5 h-5 mr-3 text-brand-accent" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-        Transfer Money
-      </a>
-</nav>
-<!-- Logout -->
-<div class="p-6 border-t border-brand-border">
-<button class="flex items-center text-sm font-medium text-brand-textMuted hover:text-white transition-colors">
-<svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-        Logout
-      </button>
-</div>
-</aside>
-<!-- END: Sidebar -->
+{% include "partials/sidebar.html" with active_page="transfer" %}
 <!-- Main Content Area -->
-<main class="ml-64 flex-1 flex flex-col">
+<main class="flex-1 flex flex-col">
 <!-- BEGIN: Top Bar -->
 <header class="flex items-center justify-between px-8 py-4" data-purpose="top-navigation">
 <button class="flex items-center text-sm text-brand-textMuted hover:text-white transition-colors">
 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M10 19l-7-7m0 0l7-7m-7 7h18" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
         Back to Account Details
       </button>
-<div class="flex items-center space-x-6 text-brand-textMuted">
-<button class="hover:text-white"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></button>
-<button class="hover:text-white"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></button>
-</div>
 </header>
 <!-- END: Top Bar -->
 <!-- BEGIN: Transfer Screen Content -->
@@ -90,38 +37,58 @@
 <h2 class="text-3xl font-bold mb-2">Transfer Money</h2>
 <p class="text-brand-textMuted">Move funds securely between accounts or to external beneficiaries.</p>
 </section>
+<section
+  class="hidden min-h-[360px] items-center justify-center"
+  id="transferErrorState"
+  aria-live="polite"
+>
+<div class="w-full max-w-md bg-brand-card rounded-2xl border border-brand-border shadow-2xl p-8 text-center">
+<div class="w-14 h-14 mx-auto mb-5 rounded-full bg-red-500/10 border border-red-500/30 flex items-center justify-center">
+<svg class="w-7 h-7 text-red-400" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<h3 class="text-2xl font-bold mb-3" id="transferErrorTitle">No Account Found</h3>
+<p class="text-sm text-brand-textMuted leading-relaxed mb-6" id="transferErrorMessage">Please select valid account details</p>
+<button class="bg-brand-accent hover:bg-opacity-90 text-white font-semibold px-6 py-3 rounded-lg transition-all" id="transferErrorBack" type="button">
+Back to Transfer
+</button>
+</div>
+</section>
 <div class="flex flex-col lg:flex-row gap-8 items-start">
 <!-- BEGIN: Transfer Form Card -->
 <div class="flex-1 bg-brand-card rounded-2xl p-8 border border-brand-border shadow-2xl w-full max-w-2xl" data-purpose="form-container">
-<form class="space-y-8">
+<form class="space-y-8" id="transferForm" novalidate>
 <!-- From Account Section -->
 <div data-purpose="input-group">
 <label class="block text-[10px] font-bold uppercase tracking-widest text-brand-textMuted mb-3">From Account</label>
 <div class="relative">
-<select class="w-full bg-black/40 border border-brand-border rounded-lg px-4 py-3.5 appearance-none focus:ring-1 focus:ring-brand-accent focus:border-brand-accent outline-none">
-<option>Primary Savings ****4582 — ₹2,45,000.00</option>
+<select class="w-full bg-black/40 border border-brand-border rounded-lg px-4 py-3.5 appearance-none focus:ring-1 focus:ring-brand-accent focus:border-brand-accent outline-none" id="fromAccount" name="from_account" required>
+<option value="">Loading accounts...</option>
 </select>
 <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none">
 <svg class="w-4 h-4 text-brand-textMuted" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
 </div>
 </div>
 </div>
-<!-- To Account & IFSC Row -->
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- To Account Section -->
 <div data-purpose="input-group">
 <label class="block text-[10px] font-bold uppercase tracking-widest text-brand-textMuted mb-3">To Account Number</label>
-<input class="w-full bg-black/40 border border-brand-border rounded-lg px-4 py-3.5 placeholder:text-brand-textMuted/40 focus:ring-1 focus:ring-brand-accent focus:border-brand-accent outline-none" placeholder="Enter account number" type="text"/>
-</div>
-<div data-purpose="input-group">
-<label class="block text-[10px] font-bold uppercase tracking-widest text-brand-textMuted mb-3">IFSC Code</label>
-<input class="w-full bg-black/40 border border-brand-border rounded-lg px-4 py-3.5 placeholder:text-brand-textMuted/40 focus:ring-1 focus:ring-brand-accent focus:border-brand-accent outline-none" placeholder="APEX0001234" type="text"/>
-</div>
-</div>
+<select
+id="toAccount"
+name="to_account"
+class="w-full bg-black/40 border border-brand-border rounded-lg px-4 py-3.5 focus:ring-1 focus:ring-brand-accent focus:border-brand-accent outline-none"
+required
+>
+<option value="">
+Select Account Number
+</option>
+</select></div>
 <!-- Amount Section -->
 <div data-purpose="input-group">
 <label class="block text-[10px] font-bold uppercase tracking-widest text-brand-textMuted mb-3">Amount (₹)</label>
 <div class="relative">
-<input class="w-full bg-black/40 border border-brand-border rounded-lg px-4 py-4 text-lg font-medium focus:ring-1 focus:ring-brand-accent focus:border-brand-accent outline-none" type="text" value="₹ 0.00"/>
+<input class="w-full bg-black/40 border border-brand-border rounded-lg px-4 py-4 text-lg font-medium focus:ring-1 focus:ring-brand-accent focus:border-brand-accent outline-none" id="transferAmount" name="amount" min="1" required step="0.01" type="number" value=""/>
 </div>
 </div>
 <!-- Form Actions -->
@@ -169,27 +136,199 @@
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const go = (url) => { window.location.href = url; };
+    const token = localStorage.getItem('access') || localStorage.getItem('token');
+    const form = document.getElementById('transferForm');
+    const formContainer = document.querySelector('[data-purpose="form-container"]');
+    const infoCard = document.querySelector('[data-purpose="info-card"]');
+    const errorState = document.getElementById('transferErrorState');
+    const errorTitle = document.getElementById('transferErrorTitle');
+    const errorMessage = document.getElementById('transferErrorMessage');
+    const errorBack = document.getElementById('transferErrorBack');
+    const fromAccount = document.getElementById('fromAccount');
+    const toAccount = document.getElementById('toAccount');
+    const amount = document.getElementById('transferAmount');
+    let userAccounts = [];
 
-    document.querySelectorAll('a').forEach((link) => {
-      const text = link.textContent.trim().toLowerCase();
-      if (text.includes('view accounts')) link.href = '/accounts/';
-      if (text.includes('account summary')) link.href = '/summary/';
-      if (text.includes('transfer money')) link.href = '/transfer/';
+    if (!token) {
+      go('/login-page/');
+      return;
+    }
+
+    function money(value) {
+      return '₹' + Number(value || 0).toLocaleString('en-IN', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+    }
+
+
+    function accountLabel(account) {
+      return `${account.account_type || 'Account'} ${account.account_number} - ${money(account.balance)}`;
+    }
+
+    function showTransferError(title, message) {
+      errorTitle.textContent = title || 'No Account Found';
+      errorMessage.textContent = message || 'Please select valid account details';
+      errorState.classList.remove('hidden');
+      errorState.classList.add('flex');
+      formContainer.classList.add('hidden');
+      infoCard.classList.add('hidden');
+    }
+
+    function hideTransferError() {
+      errorState.classList.add('hidden');
+      errorState.classList.remove('flex');
+      formContainer.classList.remove('hidden');
+      infoCard.classList.remove('hidden');
+    }
+
+    function markInvalid(element) {
+      element.classList.add('border-red-500', 'focus:border-red-500');
+      element.classList.remove('border-brand-border', 'focus:border-brand-accent');
+    }
+
+    function clearInvalid(element) {
+      element.classList.remove('border-red-500', 'focus:border-red-500');
+      element.classList.add('border-brand-border', 'focus:border-brand-accent');
+    }
+
+    function validateTransferForm() {
+      [fromAccount, toAccount, amount].forEach(clearInvalid);
+
+      if (!fromAccount.value || !toAccount.value || !amount.value) {
+        if (!fromAccount.value) markInvalid(fromAccount);
+        if (!toAccount.value) markInvalid(toAccount);
+        if (!amount.value) markInvalid(amount);
+        showTransferError('No Account Found', 'Please select valid account details');
+        return false;
+      }
+
+      if (fromAccount.value === toAccount.value || Number(amount.value) <= 0) {
+        if (fromAccount.value === toAccount.value) {
+          markInvalid(fromAccount);
+          markInvalid(toAccount);
+        }
+        if (Number(amount.value) <= 0) markInvalid(amount);
+        showTransferError('Invalid Account Details', 'Please select valid account details');
+        return false;
+      }
+
+      const hasFromAccount = userAccounts.some((account) => String(account.account_number) === String(fromAccount.value));
+      const hasToAccount = userAccounts.some((account) => String(account.account_number) === String(toAccount.value));
+
+      if (!hasFromAccount || !hasToAccount) {
+        if (!hasFromAccount) markInvalid(fromAccount);
+        if (!hasToAccount) markInvalid(toAccount);
+        showTransferError('No Account Found', 'Please select valid account details');
+        return false;
+      }
+
+      return true;
+    }
+
+    function renderToAccounts() {
+      const selectedFromAccount = fromAccount.value;
+      const destinationAccounts = userAccounts.filter((account) => {
+        return String(account.account_number) !== String(selectedFromAccount);
+      });
+
+      if (!selectedFromAccount) {
+        toAccount.innerHTML = '<option value="">Select From Account first</option>';
+        return;
+      }
+
+      toAccount.innerHTML = destinationAccounts.length
+        ? '<option value="">Select Account Number</option>' + destinationAccounts.map((account) => {
+            return `<option value="${account.account_number}">${accountLabel(account)}</option>`;
+          }).join('')
+        : '<option value="">No other accounts available</option>';
+    }
+
+    fromAccount.addEventListener('change', renderToAccounts);
+    [fromAccount, toAccount, amount].forEach((element) => {
+      element.addEventListener('input', () => clearInvalid(element));
+      element.addEventListener('change', () => clearInvalid(element));
     });
+
+    errorBack.addEventListener('click', hideTransferError);
 
     document.querySelectorAll('button').forEach((button) => {
       const text = button.textContent.trim().toLowerCase();
       if (text.includes('logout')) {
-        button.addEventListener('click', () => go('/login-page/'));
-      } else if (text.includes('transfer')) {
-        button.addEventListener('click', (event) => {
-          event.preventDefault();
-          go('/accounts/');
+        button.addEventListener('click', () => {
+          localStorage.removeItem('access');
+          localStorage.removeItem('refresh');
+          localStorage.removeItem('token');
+          localStorage.removeItem('selectedAccountId');
+          localStorage.removeItem('selectedAccountNumber');
+          go('/login-page/');
         });
       } else if (text.includes('back') || text.includes('cancel')) {
-        button.addEventListener('click', () => go('/accounts/'));
+        button.addEventListener('click', () => go('/dashboard/'));
       }
     });
+
+    async function loadAccounts() {
+      try {
+        const response = await fetch('/api/banking/my-accounts/', {
+          headers: { 'Authorization': 'Bearer ' + token }
+        });
+        const accounts = await response.json();
+
+        if (!response.ok) throw new Error('Failed to load accounts.');
+
+        userAccounts = accounts;
+
+        fromAccount.innerHTML = accounts.length
+          ? '<option value="">Select From Account</option>' + accounts.map((account) => `<option value="${account.account_number}">${accountLabel(account)}</option>`).join('')
+          : '<option value="">No accounts found</option>';
+
+        if (!accounts.length) {
+          showTransferError('No Account Found', 'Please select valid account details');
+          return;
+        }
+
+        renderToAccounts();
+      } catch (error) {
+        showTransferError('No Account Found', 'Please select valid account details');
+      }
+    }
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      try {
+        if (!validateTransferForm()) return;
+
+        const response = await fetch('/api/banking/transfer-money/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+          },
+          body: JSON.stringify({
+            from_account: fromAccount.value,
+            to_account: toAccount.value,
+            amount: amount.value
+          })
+        });
+        const data = await response.json().catch(() => ({}));
+
+        if (!response.ok) {
+          const message = data.error || data.detail || 'Please select valid account details';
+          const title = message === 'No Account Found' ? 'No Account Found' : 'Invalid Account Details';
+          showTransferError(title, message);
+          return;
+        }
+
+        alert('Transfer Successful');
+        go('/dashboard/');
+      } catch (error) {
+        showTransferError('Invalid Account Details', 'Please select valid account details');
+      }
+    });
+
+    loadAccounts();
   });
 </script>
 </body></html>

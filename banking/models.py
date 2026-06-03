@@ -10,11 +10,35 @@ ACCOUNT_TYPES = [
 ]
 
 class Account(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    account_number = models.CharField(max_length=20, unique=True)
-    bank_name = models.CharField(max_length=100)
-    account_type = models.CharField(max_length=20, choices=ACCOUNT_TYPES)
-    balance = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )
+
+    account_number = models.CharField(
+        max_length=20,
+        unique=True
+    )
+
+    bank_name = models.CharField(
+        max_length=100
+    )
+
+    ifsc_code = models.CharField(
+        max_length=20
+    )
+
+    account_type = models.CharField(
+        max_length=20,
+        choices=ACCOUNT_TYPES
+    )
+
+    balance = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0
+    )
 
 
 class Transaction(models.Model):
@@ -22,3 +46,11 @@ class Transaction(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     transaction_type = models.CharField(max_length=10)
     created_at = models.DateTimeField(auto_now_add=True)
+
+class Todo(models.Model):
+    text = models.CharField(max_length=200)
+    completed = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.text
+

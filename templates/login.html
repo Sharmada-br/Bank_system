@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Aureon Bank - Login</title>
-  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+<link rel="stylesheet" href="/static/css/output.css">
   <style>
     body { background: #050505; color: #fff; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
     .card { background: #0f0f11; border: 1px solid #24242a; border-radius: 8px; }
@@ -71,7 +71,7 @@
       button.disabled = true;
       button.textContent = 'Logging in...';
       try {
-        const response = await fetch('/api/users/login/', {
+        const response = await fetch('/api/login/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email: form.email.value, password: form.password.value })
@@ -81,7 +81,7 @@
         localStorage.setItem('access', data.access);
         localStorage.setItem('refresh', data.refresh);
         localStorage.setItem('token', data.access);
-        window.location.href = '/accounts/';
+        window.location.href = '/dashboard/';
       } catch (err) {
         error.textContent = err.message;
         error.classList.remove('hidden');

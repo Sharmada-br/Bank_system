@@ -5,25 +5,7 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Aureon Bank - View Accounts</title>
 <!-- Tailwind CSS v3 CDN -->
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            bank: {
-              background: '#0a0a0a',
-              sidebar: '#0c0c0c',
-              border: '#1f1f1f',
-              accent: '#a78bfa',
-              accentHover: '#8b5cf6',
-              muted: '#71717a'
-            }
-          }
-        }
-      }
-    }
-  </script>
+<link rel="stylesheet" href="/static/css/output.css">
 <!-- Google Fonts: Inter -->
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -52,39 +34,7 @@
 </header>
 <!-- END: TopHeader -->
 <div class="flex flex-1 overflow-hidden">
-<!-- BEGIN: Sidebar -->
-<aside class="w-64 border-r border-bank-border bg-bank-sidebar flex flex-col justify-between py-6 shrink-0" data-purpose="sidebar-navigation">
-<div>
-<div class="px-6 mb-8">
-<h2 class="text-bank-accent font-bold tracking-wider text-sm uppercase">Aureon Bank India</h2>
-<p class="text-[10px] text-bank-muted uppercase tracking-widest mt-1">Premium Banking</p>
-</div>
-<nav class="space-y-1">
-<!-- Active State -->
-<a class="active-nav flex items-center px-6 py-3 text-bank-accent text-sm font-medium gap-3" href="#">
-<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg"><rect height="18" rx="2" ry="2" width="18" x="3" y="3"></rect><path d="M7 7h3v10H7z"></path><path d="M14 7h3v10h-3z"></path></svg>
-            View Accounts
-          </a>
-<!-- Link 2 -->
-<a class="flex items-center px-6 py-3 text-gray-400 hover:text-white hover:bg-white/5 text-sm font-medium gap-3 transition-colors" href="#">
-<span class="material-symbols-outlined" style="font-size: 18px;">swap_horiz</span>
-  Transfer Money
-</a>
-<!-- Link 3 -->
-<a class="flex items-center px-6 py-3 text-gray-400 hover:text-white hover:bg-white/5 text-sm font-medium gap-3 transition-colors" href="#">
-<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M3 3v18h18"></path><path d="M7 16h3"></path><path d="M11 11h3"></path><path d="M15 6h3"></path></svg>
-            Account Summary
-          </a>
-</nav>
-</div>
-<div class="px-6">
-<button class="flex items-center text-gray-400 hover:text-white text-sm font-medium gap-3 transition-colors">
-<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" x2="9" y1="12" y2="12"></line></svg>
-          Logout
-        </button>
-</div>
-</aside>
-<!-- END: Sidebar -->
+{% include "partials/sidebar.html" with active_page="accounts" %}
 <!-- BEGIN: MainContent -->
 <main class="flex-1 flex flex-col items-center justify-center relative overflow-y-auto" data-purpose="empty-state-view">
 <!-- Central Empty State -->

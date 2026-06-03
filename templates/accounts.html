@@ -5,23 +5,8 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Your Accounts - Aureon Bank</title>
 <!-- Tailwind CSS v3 CDN with Plugins -->
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<!-- Custom Tailwind Configuration -->
-<script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            'brand-purple': '#7c3aed',
-            'brand-dark': '#0a0a0a',
-            'card-dark': '#141414',
-            'card-border': '#262626',
-            'text-muted': '#9ca3af',
-          }
-        }
-      }
-    }
-  </script>
+<link rel="stylesheet" href="/static/css/output.css"><!-- Custom Tailwind Configuration -->
+
 <!-- Custom Styles for Specific Refinements -->
 <style data-purpose="custom-layouts">
     body {
@@ -53,7 +38,6 @@
 <a class="text-xl font-bold tracking-tight" href="#">Aureon Bank</a>
 </div>
 <div class="flex items-center gap-6">
-<a class="text-sm font-medium hover:text-brand-purple transition-colors" href="#">Login</a>
 <button class="bg-brand-purple hover:bg-opacity-90 text-white px-5 py-2 rounded-md text-sm font-semibold transition-all">
         Open Account
       </button>
@@ -61,31 +45,7 @@
 </header>
 <!-- END: Top Navigation -->
 <div class="flex flex-1 overflow-hidden">
-<!-- BEGIN: Side Navigation -->
-<aside class="w-64 border-r border-card-border flex flex-col justify-between py-8">
-<nav class="flex flex-col gap-2">
-<!-- View Accounts Link (Active) -->
-<a class="sidebar-active px-6 py-3 flex items-center gap-4 text-brand-purple font-medium" href="#">
-<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="18" rx="2" width="18" x="3" y="3"></rect><path d="M3 9h18"></path><path d="M9 21V9"></path></svg>
-          View Accounts
-        </a>
-<!-- Add Account Link -->
-<a class="px-6 py-3 flex items-center gap-4 text-text-muted hover:text-white transition-colors" href="#"><svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m7 16-4-4 4-4"></path><path d="m17 8 4 4-4 4"></path><path d="M3 12h18"></path></svg> Transfer Money</a>
-<!-- Account Summary Link -->
-<a class="px-6 py-3 flex items-center gap-4 text-text-muted hover:text-white transition-colors" href="#">
-<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M3 3v18h18"></path><path d="m19 9-5 5-4-4-3 3"></path></svg>
-          Account Summary
-        </a>
-</nav>
-<!-- Logout Button -->
-<div class="px-6">
-<a class="flex items-center gap-4 text-red-500 hover:text-red-400 transition-colors text-sm font-medium" href="#">
-<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" x2="9" y1="12" y2="12"></line></svg>
-          Logout
-        </a>
-</div>
-</aside>
-<!-- END: Side Navigation -->
+{% include "partials/sidebar.html" with active_page="accounts" %}
 <!-- BEGIN: Main Dashboard Content -->
 <main class="flex-1 overflow-y-auto bg-brand-dark p-12">
 <!-- Dashboard Header -->
@@ -98,16 +58,32 @@
 </div>
 <!-- BEGIN: Accounts Grid -->
 <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-<!-- Account Card: Primary Savings -->
+<!-- Account Card: dynamic fallback -->
 <div class="bg-card-dark border border-card-border rounded-xl p-6 relative group hover:border-brand-purple/50 transition-all">
-<button class="absolute top-6 right-6 text-text-muted hover:text-white transition-colors" data-purpose="edit-account">
-<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path><path d="m15 5 4 4"></path></svg>
+<button
+    onclick="openProfile()"
+    style="
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 9999;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        border: 2px solid #a855f7;
+        background: #111827;
+        color: #a855f7;
+        cursor: pointer;
+    "
+>
+    👤
+</button><svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path><path d="m15 5 4 4"></path></svg>
 </button>
 <div class="w-12 h-12 bg-purple-900/20 border border-purple-500/30 rounded-lg flex items-center justify-center text-brand-purple mb-6">
 <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4a3 3 0 0 0-3 3H8a3 3 0 0 0-3-3V9"></path><rect height="8" rx="2" width="18" x="3" y="11"></rect></svg>
 </div>
-<h2 class="text-xl font-semibold mb-1">Primary Savings</h2>
-<p class="text-xs text-text-muted mb-1">**** 4582</p>
+<h2 class="text-xl font-semibold mb-1">Loading Account</h2>
+<p class="text-xs text-text-muted mb-1">----</p>
 <p class="text-[10px] text-zinc-600 mb-8 font-mono">IFSC: AURB0001234</p>
 <div class="flex justify-between items-end border-t border-card-border pt-4">
 <div>
@@ -117,7 +93,7 @@
 <button class="text-[10px] uppercase tracking-widest font-bold text-text-muted hover:text-white transition-colors bg-zinc-800/50 px-3 py-1 rounded">Details</button>
 </div>
 </div>
-<!-- Account Card: Business Checking -->
+<!-- Account Card: dynamic fallback -->
 <div class="bg-card-dark border border-card-border rounded-xl p-6 relative group hover:border-brand-purple/50 transition-all">
 <button class="absolute top-6 right-6 text-text-muted hover:text-white transition-colors" data-purpose="edit-account">
 <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path><path d="m15 5 4 4"></path></svg>
@@ -125,8 +101,8 @@
 <div class="w-12 h-12 bg-green-900/20 border border-green-500/30 rounded-lg flex items-center justify-center text-green-500 mb-6">
 <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><rect height="14" rx="2" ry="2" width="20" x="2" y="7"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
 </div>
-<h2 class="text-xl font-semibold mb-1">Business Checking</h2>
-<p class="text-xs text-text-muted mb-1">**** 9012</p>
+<h2 class="text-xl font-semibold mb-1">Loading Account</h2>
+<p class="text-xs text-text-muted mb-1">----</p>
 <p class="text-[10px] text-zinc-600 mb-8 font-mono">IFSC: AURB0001234</p>
 <div class="flex justify-between items-end border-t border-card-border pt-4">
 <div>
@@ -136,7 +112,7 @@
 <button class="text-[10px] uppercase tracking-widest font-bold text-text-muted hover:text-white transition-colors bg-zinc-800/50 px-3 py-1 rounded">Details</button>
 </div>
 </div>
-<!-- Account Card: Emergency Fund -->
+<!-- Account Card: dynamic fallback -->
 <div class="bg-card-dark border border-card-border rounded-xl p-6 relative group hover:border-brand-purple/50 transition-all">
 <button class="absolute top-6 right-6 text-text-muted hover:text-white transition-colors" data-purpose="edit-account">
 <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path><path d="m15 5 4 4"></path></svg>
@@ -144,8 +120,8 @@
 <div class="w-12 h-12 bg-yellow-900/20 border border-yellow-500/30 rounded-lg flex items-center justify-center text-yellow-500 mb-6">
 <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M3 21h18"></path><path d="M3 10h18"></path><path d="M5 21V10"></path><path d="M9 21V10"></path><path d="M15 21V10"></path><path d="M19 21V10"></path><path d="m2 10 10-7 10 7"></path></svg>
 </div>
-<h2 class="text-xl font-semibold mb-1">Emergency Fund</h2>
-<p class="text-xs text-text-muted mb-1">**** 3341</p>
+<h2 class="text-xl font-semibold mb-1">Loading Account</h2>
+<p class="text-xs text-text-muted mb-1">----</p>
 <p class="text-[10px] text-zinc-600 mb-8 font-mono">IFSC: AURB0001234</p>
 <div class="flex justify-between items-end border-t border-card-border pt-4">
 <div>
@@ -179,6 +155,11 @@
     const go = (url) => { window.location.href = url; };
     const token = localStorage.getItem('access') || localStorage.getItem('token');
     const accountsGrid = document.querySelector('section.grid.grid-cols-1');
+
+    if (!token) {
+      go('/login-page/');
+      return;
+    }
 
     function money(value) {
       return '₹' + Number(value || 0).toLocaleString('en-IN', {
@@ -234,7 +215,7 @@
         const accounts = await response.json();
         accountsGrid.innerHTML = accounts.length
           ? accounts.map(accountCard).join('')
-          : '<div class="bg-card-dark border border-card-border rounded-xl p-6 text-text-muted">No accounts available. Click Add Account to create one.</div>';
+          : '<div class="bg-card-dark border border-card-border rounded-xl p-6 text-text-muted">No accounts found</div>';
 
         bindAccountActions();
       } catch (error) {
@@ -246,12 +227,17 @@
       document.querySelectorAll('[data-purpose="edit-account"]').forEach((button) => {
         button.addEventListener('click', (event) => {
           event.stopPropagation();
-          go('/edit-account/');
+          const card = event.target.closest('[data-account-id]');
+          if (card) localStorage.setItem('selectedAccountId', card.dataset.accountId);
+          go('/edit-account/?id=' + (card ? card.dataset.accountId : ''));
         });
       });
 
-      document.querySelectorAll('.bg-card-dark.border').forEach((card) => {
-        card.addEventListener('click', () => go('/account-page/'));
+      document.querySelectorAll('[data-account-id]').forEach((card) => {
+        card.addEventListener('click', () => {
+          localStorage.setItem('selectedAccountId', card.dataset.accountId);
+          go('/account-page/?id=' + card.dataset.accountId);
+        });
       });
 
       document.querySelectorAll('button').forEach((button) => {
@@ -259,19 +245,14 @@
         if (text.includes('details')) {
           button.addEventListener('click', (event) => {
             event.stopPropagation();
-            go('/account-page/');
+            const card = event.target.closest('[data-account-id]');
+            if (card) localStorage.setItem('selectedAccountId', card.dataset.accountId);
+            go('/account-page/?id=' + (card ? card.dataset.accountId : ''));
           });
         }
       });
     }
 
-    document.querySelectorAll('a').forEach((link) => {
-      const text = link.textContent.trim().toLowerCase();
-      if (text.includes('login') || text.includes('logout')) link.href = '/login-page/';
-      if (text.includes('view accounts')) link.href = '/dashboard/';
-      if (text.includes('transfer money')) link.href = '/transfer/';
-      if (text.includes('account summary')) link.href = '/summary/';
-    });
 
     document.querySelectorAll('button').forEach((button) => {
       const text = button.textContent.trim().toLowerCase();
@@ -281,10 +262,17 @@
           go('/add-account/');
         });
       }
-      if (text.includes('details')) {
-        button.addEventListener('click', (event) => {
-          event.stopPropagation();
-          go('/account-page/');
+    
+    });
+
+    document.querySelectorAll('a').forEach((link) => {
+      const text = link.textContent.trim().toLowerCase();
+      if (text.includes('logout')) {
+        link.addEventListener('click', () => {
+          localStorage.removeItem('access');
+          localStorage.removeItem('refresh');
+          localStorage.removeItem('token');
+          localStorage.removeItem('selectedAccountId');
         });
       }
     });
@@ -292,5 +280,16 @@
     bindAccountActions();
     loadAccounts();
   });
+</script>
+<script>
+
+function openProfile(){
+
+    alert(
+        "Profile clicked"
+    );
+
+}
+
 </script>
 </body></html>

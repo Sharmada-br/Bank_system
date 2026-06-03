@@ -4,8 +4,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Aureon Bank - Account Details</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link rel="stylesheet" href="/static/css/output.css"><link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <style data-purpose="custom-theme">
@@ -30,40 +29,7 @@
   </style>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/></head>
 <body class="h-full flex overflow-hidden">
-<!-- BEGIN: Sidebar -->
-<aside class="w-64 bg-dark-sidebar border-r border-card flex flex-col shrink-0" data-purpose="sidebar">
-<div class="p-6">
-<div class="flex items-center gap-3 mb-10">
-<div class="w-8 h-8 bg-purple-accent rounded flex items-center justify-center">
-<svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-</div>
-<div>
-<h1 class="text-lg font-bold tracking-tight text-white">Aureon Bank</h1>
-<p class="text-[10px] uppercase tracking-[0.2em] text-gray-500 font-medium">Precision Banking</p>
-</div>
-</div>
-<nav class="space-y-1">
-<a class="flex items-center gap-3 px-4 py-3 bg-purple-accent/10 border-r-2 border-purple-accent text-white group" data-purpose="nav-item" href="#">
-<svg class="w-5 h-5 text-purple-accent" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-<span class="text-sm font-medium">View Accounts</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover-bg-dark rounded-md transition-all group" data-purpose="nav-item" href="#">
-<span class="material-symbols-outlined w-5 h-5 flex items-center justify-center text-xl">swap_horiz</span>
-<span class="text-sm font-medium">Transfer Money</span>
-</a><a class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover-bg-dark rounded-md transition-all group" data-purpose="nav-item" href="#">
-<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-<span class="text-sm font-medium">Account Summary</span>
-</a>
-</nav>
-</div>
-<div class="mt-auto p-6">
-<a class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover-bg-dark rounded-md transition-all group" href="#">
-<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-<span class="text-sm font-medium">Logout</span>
-</a>
-</div>
-</aside>
-<!-- END: Sidebar -->
+{% include "partials/sidebar.html" with active_page="accounts" %}
 <!-- BEGIN: Main Content Area -->
 <main class="flex-1 flex flex-col min-w-0 overflow-y-auto" data-purpose="main-content">
 <!-- BEGIN: Header Navigation -->
@@ -74,9 +40,7 @@
 </button>
 <h2 class="text-lg font-semibold text-white">Account Details</h2>
 </div>
-<div class="flex items-center gap-6"><div class="w-8 h-8 rounded-full bg-purple-accent/30 flex items-center justify-center border border-purple-accent/50">
-<span class="material-symbols-outlined text-purple-accent">account_circle</span>
-</div></div>
+
 </header>
 <!-- END: Header Navigation -->
 <div class="px-8 py-10 max-w-7xl w-full mx-auto space-y-10">
@@ -91,24 +55,79 @@
 <span class="text-6xl font-bold text-white tracking-tight" id="total-balance">₹ 14,82,950.42</span>
 </div>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-12 pt-4">
-<div class="space-y-1">
-<p class="text-[10px] text-gray-500 uppercase tracking-wider font-semibold">Account Number</p>
-<p class="text-lg font-medium tracking-widest text-gray-200" id="account-number">**** **** 8291</p>
-</div>
-<div class="space-y-1">
-<p class="text-[10px] text-gray-500 uppercase tracking-wider font-semibold">IFSC Code</p>
-<p class="text-lg font-medium tracking-widest text-gray-200 uppercase" id="ifsc-code">Aureon001042</p>
-</div>
-<div class="space-y-1">
-<p class="text-[10px] text-gray-500 uppercase tracking-wider font-semibold">Account Type</p>
-<div class="pt-1">
-<span class="bg-purple-accent/20 text-purple-accent text-[11px] font-bold px-3 py-1.5 rounded uppercase tracking-wider border border-purple-accent/20" id="account-type">
-                  Savings Premium
-                </span>
-</div>
-</div>
-</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 pt-4">
+
+    <!-- ACCOUNT NUMBER -->
+
+    <div class="space-y-1">
+
+        <p class="text-[10px] text-gray-500 uppercase tracking-wider font-semibold">
+            Account Number
+        </p>
+
+        <p
+            class="text-lg font-medium tracking-widest text-gray-200"
+            id="account-number"
+        >
+            **** **** 8291
+        </p>
+
+    </div>
+
+    <!-- IFSC CODE -->
+
+    <div class="space-y-1">
+
+        <p class="text-[10px] text-gray-500 uppercase tracking-wider font-semibold">
+            IFSC Code
+        </p>
+
+        <p
+            class="text-lg font-medium tracking-widest text-gray-200 uppercase"
+            id="ifsc-code"
+        >
+            AUREON001042
+        </p>
+
+    </div>
+    <!-- ACCOUNT TYPE -->
+
+    <div class="space-y-1">
+
+        <p class="text-[10px] text-gray-500 uppercase tracking-wider font-semibold">
+            Account Type
+        </p>
+
+        <div class="pt-1">
+
+            <span
+                class="bg-purple-accent/20 text-purple-accent text-[11px] font-bold px-3 py-1.5 rounded uppercase tracking-wider border border-purple-accent/20"
+                id="account-type"
+            >
+                Savings
+            </span>
+
+        </div>
+
+    </div>
+
+    <!-- BANK NAME -->
+
+    <div class="space-y-1">
+
+        <p class="text-[10px] text-gray-500 uppercase tracking-wider font-semibold">
+            Bank Name
+        </p>
+
+        <p
+            class="text-lg font-medium tracking-widest text-gray-200"
+            id="bank-name"
+        >
+            Aureon Bank
+        </p>
+
+    </div>
+
 </div>
 </section>
 <!-- END: Balance Display -->
@@ -127,17 +146,25 @@
 <span class="absolute inset-y-0 left-3 flex items-center text-gray-500">
 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
 </span>
-<input class="w-full bg-dark-sidebar border-card rounded-lg pl-10 text-sm py-2.5 focus:ring-purple-accent/50 focus:border-purple-accent transition-all text-gray-300" placeholder="Search by description or amount..." type="text"/>
-</div>
+<input
+    id="searchInput"
+    class="w-full bg-dark-sidebar border-card rounded-lg pl-10 text-sm py-2.5 focus:ring-purple-accent/50 focus:border-purple-accent transition-all text-gray-300"
+    placeholder="Search by description or amount..."
+    type="text"
+/></div>
 <button class="bg-purple-accent hover:bg-purple-600 text-white text-sm font-semibold px-4 py-2.5 rounded-lg flex items-center gap-2 transition-colors">
 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
 <span class="">Add Transaction</span>
 </button>
 <div class="relative">
-<select class="bg-dark-sidebar border-card rounded-lg text-sm py-2.5 pr-10 pl-4 text-gray-400 focus:ring-purple-accent/50 focus:border-purple-accent appearance-none transition-all">
-<option>All Categories</option>
-<option>Transfers</option>
-<option>Utilities</option>
+<select
+    id="categoryFilter"
+    class="bg-dark-sidebar border-card rounded-lg text-sm py-2.5 pr-10 pl-4 text-gray-400 focus:ring-purple-accent/50 focus:border-purple-accent appearance-none transition-all"
+>
+    <option value="all">All Categories</option>
+    <option value="deposit">Deposit</option>
+    <option value="withdraw">Withdraw</option>
+
 </select>
 <span class="absolute inset-y-0 right-3 flex items-center pointer-events-none text-gray-500">
 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
@@ -314,33 +341,96 @@
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const go = (url) => { window.location.href = url; };
-    const rows = Array.from(document.querySelectorAll('#transaction-tbody tr'));
+    const token = localStorage.getItem('access') || localStorage.getItem('token');
+    const params = new URLSearchParams(window.location.search);
+    const accountId = params.get('id') || localStorage.getItem('selectedAccountId');
+    const tbody = document.getElementById('transaction-tbody');
     const footer = document.querySelector('[data-purpose="table-footer"]');
     const footerText = footer ? footer.querySelector('p') : null;
     const paginationButtons = footer ? Array.from(footer.querySelectorAll('button')) : [];
     const paginationEllipsis = footer ? footer.querySelector('span.px-2') : null;
     const rowsPerPage = 2;
-    const totalPages = Math.max(1, Math.ceil(rows.length / rowsPerPage));
+    let rows = Array.from(document.querySelectorAll('#transaction-tbody tr'));
+    let totalPages = Math.max(1, Math.ceil(rows.length / rowsPerPage));
     let currentPage = 1;
+
+    if (!token) {
+      go('/login-page/');
+      return;
+    }
+
+    if (!accountId) {
+      alert('Please select an account first.');
+      go('/dashboard/');
+      return;
+    }
+
+    function money(value) {
+      return '₹ ' + Number(value || 0).toLocaleString('en-IN', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+    }
+
+    function formatDate(value) {
+      return value ? new Date(value).toLocaleString() : '';
+    }
+
+    function rowTemplate(transaction) {
+      const isCredit = transaction.type === 'deposit';
+      return `
+        <tr class="hover:bg-white/[0.02] transition-colors group">
+          <td class="px-6 py-6">
+            <p class="text-sm font-semibold text-white">${formatDate(transaction.date)}</p>
+          </td>
+          <td class="px-6 py-6">
+            <div class="flex items-center gap-4">
+              <div class="w-10 h-10 rounded-lg ${isCredit ? 'bg-emerald-900/20 text-emerald-500' : 'bg-gray-800 text-gray-400'} flex items-center justify-center">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="${isCredit ? 'M7 11l5-5m0 0l5 5m-5-5v12' : 'M20 12H4'}" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-white">${isCredit ? 'Credit Transaction' : 'Debit Transaction'}</p>
+                <p class="text-[10px] text-gray-500 uppercase mt-0.5">${transaction.type}</p>
+              </div>
+            </div>
+          </td>
+          <td class="px-6 py-6 text-right ${isCredit ? 'text-emerald-400 font-semibold text-sm' : 'text-gray-500'}">${isCredit ? money(transaction.amount) : '—'}</td>
+          <td class="px-6 py-6 text-right ${!isCredit ? 'text-red-400 font-semibold text-sm' : 'text-gray-500'}">${!isCredit ? money(transaction.amount) : '—'}</td>
+<td class="px-6 py-6 text-right text-gray-300 font-medium text-sm">
+    ${money(transaction.balance)}
+</td>        </tr>
+      `;
+    }
 
     document.querySelectorAll('a').forEach((link) => {
       const text = link.textContent.trim().toLowerCase();
-      if (text.includes('view accounts')) link.href = '/accounts/';
+      if (text.includes('view accounts')) link.href = '/dashboard/';
       if (text.includes('transfer money')) link.href = '/transfer/';
       if (text.includes('account summary')) link.href = '/summary/';
       if (text.includes('logout')) link.href = '/login-page/';
+      if (text.includes('logout')) {
+        link.addEventListener('click', () => {
+          localStorage.removeItem('access');
+          localStorage.removeItem('refresh');
+          localStorage.removeItem('token');
+          localStorage.removeItem('selectedAccountId');
+          localStorage.removeItem('selectedAccountNumber');
+        });
+      }
     });
 
     document.querySelectorAll('button').forEach((button) => {
       const text = button.textContent.trim().toLowerCase();
       if (text.includes('add transaction') || text.includes('add entry')) {
-        button.addEventListener('click', () => go('/transactions-page/'));
+        button.addEventListener('click', () => go('/transactions-page/?id=' + accountId));
       } else if (text.includes('back') || button.querySelector('path[d*="M10 19"]')) {
-        button.addEventListener('click', () => go('/accounts/'));
+        button.addEventListener('click', () => go('/dashboard/'));
       }
     });
 
     function paintPage(page) {
+      rows = Array.from(document.querySelectorAll('#transaction-tbody tr'));
+      totalPages = Math.max(1, Math.ceil(rows.length / rowsPerPage));
       currentPage = Math.min(Math.max(page, 1), totalPages);
 
       rows.forEach((row, index) => {
@@ -388,7 +478,93 @@
       });
     });
 
-    paintPage(1);
+    async function loadAccountDetails() {
+      try {
+const response = await fetch('/account/' + accountId + '/', {          headers: { 'Authorization': 'Bearer ' + token }
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) throw new Error(data.detail || 'Failed to load account details.');
+
+        localStorage.setItem('selectedAccountId', data.id);
+        localStorage.setItem('selectedAccountNumber', data.account_number);
+
+        document.getElementById('total-balance').textContent = money(data.balance);
+        document.getElementById('account-number').textContent = data.account_number;
+        document.getElementById('ifsc-code').textContent = data.ifsc_code || 'AUREON0001';
+        document.getElementById('account-type').textContent = data.account_type;
+        document.getElementById('bank-name').textContent = data.bank_name || 'Aureon Bank';
+
+        tbody.innerHTML = data.transactions.length
+  ? data.transactions.map(rowTemplate).join('')
+  : '<tr><td class="px-6 py-6 text-gray-500" colspan="5">No transactions found</td></tr>';
+
+rows = Array.from(document.querySelectorAll('#transaction-tbody tr'));
+
+const searchInput =
+    document.getElementById('searchInput');
+
+const categoryFilter =
+    document.getElementById('categoryFilter');
+
+function filterTransactions() {
+
+    const searchText =
+        searchInput.value.toLowerCase();
+
+    const category =
+        categoryFilter.value.toLowerCase();
+
+    rows.forEach((row) => {
+
+        const rowText =
+            row.innerText.toLowerCase();
+
+        const isDeposit =
+            rowText.includes('deposit');
+
+        const isWithdraw =
+            rowText.includes('withdraw');
+
+        const matchesSearch =
+            rowText.includes(searchText);
+
+        let matchesCategory = true;
+
+        if (category === 'deposit') {
+            matchesCategory = isDeposit;
+        }
+
+        if (category === 'withdraw') {
+            matchesCategory = isWithdraw;
+        }
+
+        row.style.display =
+            matchesSearch && matchesCategory
+                ? ''
+                : 'none';
+    });
+}
+
+searchInput.addEventListener(
+    'keyup',
+    filterTransactions
+);
+
+categoryFilter.addEventListener(
+    'change',
+    filterTransactions
+);
+
+paintPage(1);
+      } catch (error) {
+        alert(error.message || 'Failed to load account details.');
+        go('/dashboard/');
+      }
+    }
+
+    loadAccountDetails();
   });
 </script>
 </body></html>
