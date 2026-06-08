@@ -328,6 +328,36 @@ def delete_account(request):
 
     return Response({'message': 'Account deleted successfully'})
 
+@api_view(['PUT'])
+def update_todo(request, id):
+
+    todo = Todo.objects.get(id=id)
+
+    todo.text = request.data.get(
+        'text',
+        todo.text
+    )
+
+    todo.completed = request.data.get(
+        'completed',
+        todo.completed
+    )
+
+    todo.due_date = request.data.get(
+    'due_date',
+    todo.due_date
+)
+    todo.save()
+
+    return Response({
+        "id": todo.id,
+        "text": todo.text,
+        "completed": todo.completed,
+        "due_date": todo.due_date,
+
+        "created_at": todo.created_at
+    })
+
 
 def account_page(request):
     return render(request, 'account details.html')
@@ -384,23 +414,30 @@ def get_todos(request):
         data.append({
             "id": todo.id,
             "text": todo.text,
-            "completed": todo.completed
+            "completed": todo.completed,
+            "due_date": todo.due_date,
+            "created_at": todo.created_at
+
         })
 
     return Response(data)
-
 @api_view(['POST'])
 def add_todo(request):
-    todo = Todo.objects.create(
+    print("Received Data:", request.data)
+    added_todo = Todo.objects.create(
         text=request.data.get('text'),
-        completed=False
+        completed=False,
+        due_date=request.data.get('due_date')
     )
 
     return Response({
-        'id': todo.id,
-        'text': todo.text,
-        'completed': todo.completed
+        'id': added_todo.id,
+        'text': added_todo.text,
+        'completed': added_todo.completed,
+        'due_date': added_todo.due_date,
+        'created_at': added_todo.created_at
     })
+
 @api_view(['GET'])
 def get_messages(request, count):
     data = []

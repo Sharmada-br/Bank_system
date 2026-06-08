@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import add_todo, get_message, get_todos, get_messages, delete_todo
+from .views import add_todo, get_message, get_todos, get_messages, delete_todo, update_todo
 from banking.views import (
 
     home,
@@ -80,4 +80,9 @@ urlpatterns = [
         update_account,
         name='update_account'
     ),
+
+    path(
+    'update-todo/<int:id>/',
+    update_todo
+),
 ]
